@@ -25,7 +25,8 @@ public class LuceneAnalyzers {
             CharTermAttribute attr = tokenStream.addAttribute(CharTermAttribute.class);
             tokenStream.reset();
             while (tokenStream.incrementToken()) {
-                result.add(attr.toString());
+                if (!attr.toString().isBlank())
+                    result.add(attr.toString());
             }
             return result;
         } catch (IOException e) {

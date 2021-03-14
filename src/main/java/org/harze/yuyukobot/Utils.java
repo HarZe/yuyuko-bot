@@ -24,7 +24,7 @@ public class Utils {
     public static String tsQueryBuilder(List<List<String>> tagGroups) {
         return tagGroups.stream()
                 .map(tagGroup -> tagGroup.stream()
-                        .map(tag -> tag.contains(" ") ? "''" + tag + "''" : tag) // Escaped simple quotes if the tag contains spaces
+                        .map(tag -> tag.contains(" ") ? "'" + tag + "'" : tag) // Escaped simple quotes if the tag contains spaces
                         .collect(Collectors.joining(" & "))) // AND operator for tsquery
                 .map(clause -> "(" + clause + ")") // Surround AND clauses in parenthesis
                 .collect(Collectors.joining(" | ")); // Finally OR of the clauses

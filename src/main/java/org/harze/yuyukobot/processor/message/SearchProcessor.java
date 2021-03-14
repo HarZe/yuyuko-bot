@@ -68,6 +68,10 @@ public class SearchProcessor implements MessageCreatedProcessor {
                 + " at " + formatter.format(generalContent.getUpdatedAt());
     }
 
+    private String generateNotFoundResponse() {
+        return ":four: :zero: :four: I don't know anything about that... ";
+    }
+
     private List<String> process(AnalysisResult analysisResult, Message message, String verb, DiscordUser author) {
 
         // Confirm that the is content after the verb that indicates the intent to search
@@ -124,9 +128,11 @@ public class SearchProcessor implements MessageCreatedProcessor {
             return tags;
         }).collect(Collectors.toList());
 
-        return generalContentService.queryRanked(Utils.tsQueryBuilder(tagClauses), DEFAULT_LIMIT).stream()
+        List<String> results = generalContentService.queryRanked(Utils.tsQueryBuilder(tagClauses), DEFAULT_LIMIT).stream()
                 .map(this::generateContentResponse)
                 .collect(Collectors.toList());
+
+        return results.isEmpty() ? List.of(generateNotFoundResponse()) : results;
     }
 
     @Override

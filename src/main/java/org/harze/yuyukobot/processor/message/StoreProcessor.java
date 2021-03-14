@@ -92,7 +92,9 @@ public class StoreProcessor implements MessageCreatedProcessor {
             return generateNoTagsErrorResponse(analysisResult);
 
         // Extract the content and the info to search it
-        List<String> content = postVerbWords.stream().takeWhile(word -> !TAG_SEPARATOR.equals(word)).collect(Collectors.toList());
+        List<String> content = postVerbWords.stream()
+                .takeWhile(word -> !TAG_SEPARATOR.equals(word))
+                .collect(Collectors.toList());
         List<String> info = postVerbWords.stream()
                 .dropWhile(word -> !TAG_SEPARATOR.equals(word))
                 .dropWhile(TAG_SEPARATOR::equals)
@@ -108,6 +110,10 @@ public class StoreProcessor implements MessageCreatedProcessor {
         if (urlContent) {
             content = new ArrayList<>(analysisResult.getUrls());
         }
+
+        // If there is content to store
+        if (content.isEmpty())
+            return generateNoContentErrorResponse(analysisResult);
 
         // Tag mapping (internal tags are english processed)
         Map<String, String> tags = info.stream()

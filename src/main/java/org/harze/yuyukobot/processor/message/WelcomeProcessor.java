@@ -27,7 +27,7 @@ public class WelcomeProcessor implements MessageCreatedProcessor {
     private DiscordUserService discordUserService;
 
     private String welcomeResponse() {
-        return "Ara~ :face_with_hand_over_mouth: Another human that wants to entertain me :purple_heart: \n" +
+        return "Ara Ara~ :face_with_hand_over_mouth: Another human that wants to entertain me :purple_heart: \n" +
                 "I'm just bored in the Netherworld, so I'm just lurking the Overwold to amuse myself :eyes: \n" +
                 "If you need to **store** or **find** something, let me know about it! :grin: ";
     }
