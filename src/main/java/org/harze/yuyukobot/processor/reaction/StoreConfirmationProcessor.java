@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -34,7 +33,7 @@ public class StoreConfirmationProcessor implements ReactionAddedProcessor {
         generalContent.setDiscordUser(author);
         generalContent.setContent(storeRequest.getContent());
         generalContent.setTags(storeRequest.getTags());
-        generalContent.setReadableTabs(storeRequest.getReadableTabs());
+        generalContent.setReadableTags(storeRequest.getReadableTags());
         generalContent.setCreatedAt(now);
         generalContent.setUpdatedAt(now);
         generalContentService.create(generalContent);

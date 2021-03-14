@@ -2,17 +2,14 @@ package org.harze.yuyukobot;
 
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.GatewayDiscordClient;
-import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.event.domain.message.ReactionAddEvent;
-import discord4j.discordjson.json.gateway.StatusUpdate;
 import org.harze.yuyukobot.configuration.BotInfo;
 import org.harze.yuyukobot.handlers.MessageCreatedHandler;
 import org.harze.yuyukobot.handlers.ReactionAddedHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

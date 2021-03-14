@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
-    private static final String[] schemes = {"http","https"};
+    private static final String[] schemes = {"http", "https"};
 
     public static boolean validUrl(String url) {
         if (url == null || url.isBlank())
@@ -26,7 +26,7 @@ public class Utils {
                 .map(tagGroup -> tagGroup.stream()
                         .map(tag -> tag.contains(" ") ? "''" + tag + "''" : tag) // Escaped simple quotes if the tag contains spaces
                         .collect(Collectors.joining(" & "))) // AND operator for tsquery
-                .map(clause -> "(" + clause +")") // Surround AND clauses in parenthesis
+                .map(clause -> "(" + clause + ")") // Surround AND clauses in parenthesis
                 .collect(Collectors.joining(" | ")); // Finally OR of the clauses
     }
 }

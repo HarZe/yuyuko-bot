@@ -30,7 +30,8 @@ public class SearchProcessor implements MessageCreatedProcessor {
             Map.entry("tell", Set.of("me", "us")),
             Map.entry("show", Set.of("me", "us")),
             Map.entry("fetch", Set.of("me", "us")),
-            Map.entry("search", Set.of("me", "us"))
+            Map.entry("search", Set.of("me", "us")),
+            Map.entry("find", Set.of("me", "us"))
     );
     private static final Set<String> searchVerbs = searchVerbFollowUps.keySet();
     private static final String EXAMPLE = "Yuyuko, show me the truth"; // TODO load from BBDD
@@ -61,8 +62,9 @@ public class SearchProcessor implements MessageCreatedProcessor {
     }
 
     private String generateContentResponse(GeneralContent generalContent) {
-        return generalContent.getContent() + "\n\n"
-                + "Uploaded by " + generalContent.getDiscordUser().getUsername()
+        return generalContent.getContent() + "\n"
+                + "\nTags: " + generalContent.getReadableTags()
+                + "\nUploaded by " + generalContent.getDiscordUser().getUsername()
                 + " at " + formatter.format(generalContent.getUpdatedAt());
     }
 

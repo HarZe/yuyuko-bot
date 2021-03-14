@@ -37,7 +37,7 @@ public class GeneralContent {
 
     @Type(type = "tsvector")
     @Column(name = "readable_tags", columnDefinition = "tsvector")
-    private String readableTabs;
+    private String readableTags;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;

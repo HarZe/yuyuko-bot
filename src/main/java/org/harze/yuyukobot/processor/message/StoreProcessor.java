@@ -9,7 +9,6 @@ import org.harze.yuyukobot.analyzer.MessageAnalyzer;
 import org.harze.yuyukobot.configuration.BotInfo;
 import org.harze.yuyukobot.database.entities.DiscordUser;
 import org.harze.yuyukobot.database.entities.StoreRequest;
-import org.harze.yuyukobot.database.service.DiscordUserService;
 import org.harze.yuyukobot.database.service.StoreRequestService;
 import org.harze.yuyukobot.processor.MessageCreatedProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +72,7 @@ public class StoreProcessor implements MessageCreatedProcessor {
         storeRequest.setRequestMessageId(messageId);
         storeRequest.setContent(content);
         storeRequest.setTags(tagify(tags.keySet()));
-        storeRequest.setReadableTabs(tagify(tags.values()));
+        storeRequest.setReadableTags(tagify(tags.values()));
         storeRequest.setCreatedAt(Utils.now());
         storeRequestService.create(storeRequest);
     }
@@ -117,7 +116,7 @@ public class StoreProcessor implements MessageCreatedProcessor {
                 .collect(Collectors.toMap(LuceneAnalyzers::englishAnalyzeWord, String::toString));
         Map<String, String> quotedTags = info.stream()
                 .filter(infoTag -> analysisResult.getQuotes().contains(infoTag))
-                .map(infoTag -> infoTag.replace("'","")) // Sacrifice the ' so tsvector type works properly
+                .map(infoTag -> infoTag.replace("'", "")) // Sacrifice the ' so tsvector type works properly
                 .filter(infoTag -> !infoTag.isBlank())
                 .collect(Collectors.toMap(String::toString, String::toString));
         tags.putAll(quotedTags);
