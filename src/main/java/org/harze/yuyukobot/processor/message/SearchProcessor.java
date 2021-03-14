@@ -133,6 +133,10 @@ public class SearchProcessor implements MessageCreatedProcessor {
         Message message = event.getMessage();
         AnalysisResult analysisResult = messageAnalyzer.analyze(message.getContent());
 
+        // If there is not content, drop
+        if (analysisResult.getMeaning() == null)
+            return List.of();
+
         // Not enough words, drop attempt
         if (analysisResult.getMeaning().isEmpty() || analysisResult.getMeaning().size() < 2)
             return List.of();
