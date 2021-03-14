@@ -83,6 +83,7 @@ public class StoreProcessor implements MessageCreatedProcessor {
         List<String> postVerbWords = analysisResult.getWords().stream()
                 .dropWhile(word -> !verb.equals(LuceneAnalyzers.englishAnalyzeWord(word)))
                 .dropWhile(word -> verb.equals(LuceneAnalyzers.englishAnalyzeWord(word)))
+                .filter(word -> !word.isBlank())
                 .collect(Collectors.toList());
         if (postVerbWords.isEmpty())
             return generateNoContentErrorResponse(analysisResult);
